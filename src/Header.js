@@ -10,7 +10,7 @@ function Header() {
         <HeaderContainer>
             <HeaderLogo>
                 <Link to="/">
-                    <img src='https://i.imgur.com/7I9Was5.png'/>
+                    <HeaderLogoImage src='https://i.imgur.com/7I9Was5.png'/>
                 </Link>
             </HeaderLogo>
 
@@ -60,11 +60,11 @@ const HeaderContainer = styled.div`
     justify-content: space-between;
     color: white;
 `
-const HeaderLogo = styled.div`
-    img {
-        width : 100px;
-        margin-left: 11px;
-    }    
+const HeaderLogo = styled.div``
+
+const HeaderLogoImage = styled.img`
+    width : 100px;
+    margin-left: 11px;
 `
 
 const HeaderOptionAddress = styled.div`
