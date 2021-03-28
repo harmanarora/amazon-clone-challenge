@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import {Link} from "react-router-dom";
 
 function Header() {
     return (
         <HeaderContainer>
             <HeaderLogo>
-                <img src={"https://i.imgur.com/7I9Was5.png"}/>
+                <Link to="/">
+                    <img src='https://i.imgur.com/7I9Was5.png'/>
+                </Link>
             </HeaderLogo>
 
             <HeaderOptionAddress>
@@ -36,8 +39,10 @@ function Header() {
                     <HeaderOptionLineTwo>& Orders</HeaderOptionLineTwo>
                 </HeaderUserItem>
                 <HeaderOptionCart>
-                    <ShoppingCartIcon/>
-                    <HeaderCartCount>0</HeaderCartCount>
+                    <Link to="/cart">
+                        <ShoppingCartIcon/>
+                        <HeaderCartCount>0</HeaderCartCount>
+                    </Link>    
                 </HeaderOptionCart>
             </HeaderNavItems>
 
@@ -126,14 +131,25 @@ const HeaderNavItems = styled.div`
 `
 
 const HeaderUserItem = styled.div`
-    //TRouBLe
+    //TRouBLe = Top Right Bottom Left
     padding: 10px 9px 10px 9px;
 `
 
 const HeaderOptionCart = styled.div`
     display: flex;
-    align-items:center;
-    padding-right: 9px;
+
+    //adding Link
+    a {
+        display: flex;
+        align-items:center;
+        padding-right: 9px;
+
+        //override default color of content
+        color: white;
+
+        //remove underline
+        text-decoration: none;
+    }
 `
 
 const HeaderCartCount = styled.div`
