@@ -1,16 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
+import StarIcon from '@material-ui/icons/Star';
 
-function Product() {
+function Product({title,price,rating,image,id}) {
+
+    //object
+    //console.log(props);
+
+    //unpacked props above
+
     return (
         <ProductContainer>
-            <Title>Ipad Pro</Title>
-            <Price>$1449
+            <Title>
+                {title}
+            </Title>
+            <Price>
+                ${price}
             </Price>
             <Rating>
-                *****
+                {
+                    Array(rating)
+                    .fill()
+                    .map(rating=> <p>⭐</p>)
+                }
             </Rating>
-            <Image src='https://images-na.ssl-images-amazon.com/images/I/81oFAZ9N6bL._SL1500_.jpg'/>
+            <Image src={image}/>
             <ActionSection>
                 <AddToCartButton>
                     Add to Cart
@@ -49,7 +63,9 @@ const Price = styled.span`
     margin-top: 3px;
 `
 
-const Rating = styled.div``
+const Rating = styled.div`
+    display: flex;
+`
 
 const Image = styled.img`
     max-height: 400px;
