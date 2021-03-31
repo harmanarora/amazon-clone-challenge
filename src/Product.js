@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import StarIcon from '@material-ui/icons/Star';
 
 function Product({title,price,rating,image,id}) {
 
@@ -68,7 +67,11 @@ const Rating = styled.div`
 `
 
 const Image = styled.img`
-    max-height: 400px;
+    max-height: 300px;
+
+    //shrink as per size of window
+    //flex-shrink: 1;
+    //flex-grow: 0;
 
     //fit the image size appropriately
     object-fit: contain;
