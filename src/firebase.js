@@ -1,7 +1,8 @@
 import firebase from 'firebase'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseApp = firebase.initializeApp ({
+//const firebaseApp = 
+firebase.initializeApp ({
     apiKey: "AIzaSyB5m_pdKC05hTLjC8-Jfs9VbfVL825N9Vc",
     authDomain: "clone-challenge-d4cd9.firebaseapp.com",
     projectId: "clone-challenge-d4cd9",

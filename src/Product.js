@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { db } from './firebase.js';
 
 function Product({title,price,rating,image,id}) {
 
@@ -8,13 +9,38 @@ function Product({title,price,rating,image,id}) {
 
     //unpacked props above
 
+
+    const addToCart = () => {
+        //dupes in Cart due to undefined, debugged
+        console.log(id);
+        //creates from product
+        const cartItem = db.collection("cartItems").doc(id);
+        cartItem.get()
+        //update quantity if already present
+        .then((doc)=>{
+            console.log(doc);
+            if(doc.exists){
+                cartItem.update({
+                    quantity: doc.data().quantity + 1
+                })
+            } else{
+                db.collection("cartItems").doc(id).set({
+                    name: title,
+                    image: image,
+                    price: price,
+                    quantity: 1
+                })
+            }
+        })
+    }
+
     return (
         <ProductContainer>
             <Title>
                 {title}
             </Title>
             <Price>
-                ${price}
+                <p>$</p>{price}
             </Price>
             <Rating>
                 {
@@ -25,7 +51,9 @@ function Product({title,price,rating,image,id}) {
             </Rating>
             <Image src={image}/>
             <ActionSection>
-                <AddToCartButton>
+                <AddToCartButton
+                    onClick={addToCart}
+                >
                     Add to Cart
                 </AddToCartButton>
             </ActionSection>
@@ -60,6 +88,7 @@ const Title = styled.span``
 const Price = styled.span`
     font-weight: 500;
     margin-top: 3px;
+    display: flex;
 `
 
 const Rating = styled.div`
@@ -93,4 +122,6 @@ const AddToCartButton = styled.button`
     //width, style, color & cornering
     border: 2px solid #a88734;
     border-radius: 2px;
+
+    cursor: pointer;
 `

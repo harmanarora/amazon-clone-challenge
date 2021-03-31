@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import CartItems from './CartItems.js'
 import CartTotal from './CartTotal.js'
 
-function Cart() {
+function Cart({ cartItems }) {
     return (
         <CartContainer>
-            <CartItems />
+            <CartItems cartItems={cartItems} />
             <CartTotal />
         </CartContainer>
     )

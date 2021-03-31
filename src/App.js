@@ -4,8 +4,30 @@ import Cart from './Cart.js';
 import Home from './Home.js';
 import {  BrowserRouter as Router,  Switch,  Route } from "react-router-dom";
 import styled from 'styled-components';
+import { useState, useEffect } from 'react'
+import { db } from './firebase.js'
 
 function App() {
+  const [ cartItems, setCartItems ] = useState([]);
+
+  const getCartItems = () => {
+    db.collection('cartItems').onSnapshot((snapshot)=>{
+      const tempItems = snapshot.docs.map((doc) => ({
+        id : doc.id,
+        product: doc.data()
+      }))
+
+      setCartItems(tempItems);
+    })
+  }
+
+  useEffect(() => {
+    getCartItems();
+    //empty below as only needed for 1st page load - any object in there when refreshed will useEffect
+  }, [])
+
+  //console.log(cartItems);
+
   return (
     <Router>
       <AppContainer>
@@ -14,7 +36,7 @@ function App() {
 
         <Switch>
           <Route path="/cart">
-            <Cart/>
+            <Cart cartItems = {cartItems}/>
           </Route>
 
           <Route path="/">

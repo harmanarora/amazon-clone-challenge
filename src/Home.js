@@ -36,7 +36,7 @@ function Home() {
         getProducts()
     }, [])
     
-    console.log(products);
+    //console.log(products);
 
 
     return (
@@ -52,6 +52,7 @@ function Home() {
                             price={data.product.price}
                             rating={data.product.rating}
                             image={data.product.image}
+                            id={data.id}
                         />
                     ))
                 }

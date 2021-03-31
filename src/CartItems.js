@@ -2,13 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import CartItem from './CartItem.js'
 
-function CartItems() {
+function CartItems({ cartItems }) {
     return (
         <CartItemsContainer>
             <Title>Shopping Cart</Title>
             <hr/>
             <ItemsContainer>
-                <CartItem />
+                {
+                    cartItems.map((item)=>(
+                        <CartItem 
+                            id={item.id}
+                            item={item.product}
+                        />
+                    ))
+                }
             </ItemsContainer>
         </CartItemsContainer>
     )
@@ -17,7 +24,6 @@ function CartItems() {
 export default CartItems
 
 const CartItemsContainer = styled.div`
-    height: 300px;
     background-color: white;
     
     //margin-outside & padding-inside
@@ -28,6 +34,8 @@ const CartItemsContainer = styled.div`
     flex: 0.8;
 `
 
-const Title = styled.div``
+const Title = styled.h1`
+    margin-bottom: 8px;
+`
 
 const ItemsContainer = styled.div``

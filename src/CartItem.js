@@ -1,25 +1,36 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function CartItem() {
+function CartItem( {id, item} ) {
+
+    let options = []
+
+    for (let i=1; i<Math.max(item.quantity+1,20); i++){
+        options.push(<option value={i}> Qty: {i}</option>)
+    }
+    
     return (
         <CartItemContainer>
             <ImageContainer>
-                <img src={"https://images-na.ssl-images-amazon.com/images/I/81FH2j7EnJL._AC_SL1500_.jpg"}/>
+                <Image src={item.image}/>
             </ImageContainer>
 
             <CartItemInfo>
                 <CartItemInfoTop>
-                    <h2>New Apple iPad (10.2-inch, Wi-Fi, 128GB) - Space Gray (Latest Model, 8th Generation)</h2>
+                    <h2>{item.name}</h2>
                 </CartItemInfoTop>
                 <CartItemInfoBottom>
-                    <CartItemQuantity>5</CartItemQuantity>
+                    <CartItemQuantity>
+                        <select value={item.quantity} >
+                            {options}
+                        </select>
+                    </CartItemQuantity>
                     <CartItemDelete>Delete</CartItemDelete>
                 </CartItemInfoBottom>
             </CartItemInfo>
 
             <CartItemPrice>
-                $1449
+                ${item.price}
             </CartItemPrice>
         </CartItemContainer>
     )
@@ -31,6 +42,8 @@ const CartItemContainer = styled.div`
     padding-top: 12px;
     padding-bottom: 12px;
     display: flex;
+    //line below each cart item
+    border-bottom: 1px solid #DDD;
 `
 
 const ImageContainer = styled.div`
@@ -49,7 +62,18 @@ const ImageContainer = styled.div`
     }
 `
 
-const CartItemInfo = styled.div``
+const Image = styled.img`
+    height: 100%;
+    width: 100%;
+
+    //fit the image size appropriately
+    object-fit: contain;
+`
+
+const CartItemInfo = styled.div`
+    //to take max space in div (here, horizontally)
+    flex-grow: 1;
+`
 
 const CartItemInfoTop = styled.div`
     color: #007185;
@@ -61,9 +85,21 @@ const CartItemInfoTop = styled.div`
 const CartItemInfoBottom = styled.div`
     display: flex;
     margin-top: 4px;
+    align-items: center;
 `
 
-const CartItemQuantity = styled.div``
+const CartItemQuantity = styled.div`
+    select {
+        border-radius: 7px;
+        background-color: #F0F2F2;
+        padding: 8px;
+        box-shadow: 0 2px 5px rgba(15,17,17,.15);
+        
+        :focus {
+            outline: none;
+        }
+    }
+`
 
 const CartItemDelete = styled.div`
     color: #007185;
