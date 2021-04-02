@@ -32,7 +32,7 @@ function Home() {
 
     //react hook - makes sure to call this function once when home page is rendered 1st time (page mount)
     useEffect(() => {
-        console.log("call products");
+        //console.log("call products");
         getProducts()
     }, [])
     
@@ -46,15 +46,17 @@ function Home() {
             </Banner>
             <Content>
                 {
-                    products.map((data)=>(
-                        <Product
+                    products.map((data) =>{
+                        return (
+                            <Product
                             title={data.product.name}
                             price={data.product.price}
                             rating={data.product.rating}
                             image={data.product.image}
                             id={data.id}
-                        />
-                    ))
+                            />
+                        );
+                    })
                 }
             </Content>
         </HomeContainer>

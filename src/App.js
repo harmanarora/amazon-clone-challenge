@@ -32,7 +32,7 @@ function App() {
     <Router>
       <AppContainer>
 
-        <Header/>
+        <Header cartItems = {cartItems}/>
 
         <Switch>
           <Route path="/cart">
