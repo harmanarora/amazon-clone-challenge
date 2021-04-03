@@ -10,8 +10,10 @@ firebase.initializeApp ({
     messagingSenderId: "895845027758",
     appId: "1:895845027758:web:d2fd538795214e8ad0423f",
     measurementId: "G-CQG8BGSEHC"
-  });
+});
 
-  const db = firebase.firestore();
+const db = firebase.firestore();
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 
-  export { db }
+export { db, auth, provider }

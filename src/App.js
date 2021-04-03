@@ -5,9 +5,12 @@ import Home from './Home.js';
 import {  BrowserRouter as Router,  Switch,  Route } from "react-router-dom";
 import styled from 'styled-components';
 import { useState, useEffect } from 'react'
-import { db } from './firebase.js'
+import { auth, db } from './firebase.js'
+import Login from './Login';
 
 function App() {
+
+  const [ user, setUser ] = useState(JSON.parse(localStorage.getItem('user')));
 
   const [ cartItems, setCartItems ] = useState([]);
 
@@ -30,24 +33,47 @@ function App() {
   }, [])
 
   //console.log(cartItems);
+  //console.log("User", user);
+  //console.log(!user);
+
+  const signOut = () => {
+    auth.signOut().then(()=>{
+      //clears cookies
+      localStorage.removeItem('user');
+      
+      setUser(null);
+    })
+  }
 
   return (
     <Router>
-      <AppContainer>
+      {
+        !user ? (
+          <Login setUser={setUser}/>
+        ):(
+          <AppContainer>
 
-        <Header cartItems = {cartItems}/>
+            <Header
+              signOut={signOut}
+              user={user} 
+              cartItems={cartItems}
+            />
 
-        <Switch>
-          <Route path="/cart">
-            <Cart cartItems = {cartItems}/>
-          </Route>
+            <Switch>
 
-          <Route path="/">
-            <Home/>
-          </Route>
-        </Switch>
+              <Route path="/cart">
+                <Cart cartItems = {cartItems}/>
+              </Route>
 
-      </AppContainer>
+              <Route path="/">
+                <Home/>
+              </Route>
+            
+            </Switch>
+
+          </AppContainer>
+        )
+      }
     </Router>
   );
 }
