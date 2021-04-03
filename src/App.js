@@ -8,15 +8,18 @@ import { useState, useEffect } from 'react'
 import { db } from './firebase.js'
 
 function App() {
+
   const [ cartItems, setCartItems ] = useState([]);
 
   const getCartItems = () => {
+    //live db connection
     db.collection('cartItems').onSnapshot((snapshot)=>{
       const tempItems = snapshot.docs.map((doc) => ({
         id : doc.id,
         product: doc.data()
       }))
 
+      //updates the state
       setCartItems(tempItems);
     })
   }

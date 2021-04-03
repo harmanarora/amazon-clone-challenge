@@ -1,12 +1,34 @@
 import React from 'react'
 import styled from 'styled-components'
+import { db } from './firebase.js'
 
 function CartItem( {id, item} ) {
 
     let options = []
 
-    for (let i=1; i<Math.max(item.quantity+1,20); i++){
-        options.push(<option value={i}> Qty: {i}</option>)
+    for (let i=1; i<Math.max(item.quantity+1,10); i++){
+        options.push(<option value={i}> Qty: {i}</option>);
+    }
+
+    const changeQuantity = (event) => {
+        console.log(event);
+        console.log(event.target);
+
+        let newQuantity = event.target.value;
+        console.log(newQuantity);
+
+        //updates quantity in database -  works due to state and firebase
+        db.collection('cartItems').doc(id).update({
+            quantity: parseInt(newQuantity)
+        })
+    }
+
+    const deleteItem = (event) => {
+        
+        //event.preventDefault()
+
+        //deletes product
+        db.collection('cartItems').doc(id).delete();
     }
     
     return (
@@ -21,11 +43,20 @@ function CartItem( {id, item} ) {
                 </CartItemInfoTop>
                 <CartItemInfoBottom>
                     <CartItemQuantity>
-                        <select value={item.quantity} >
+                        <select 
+                            value={item.quantity}
+                            onChange={(event)=>changeQuantity(event)}
+                        >
                             {options}
                         </select>
                     </CartItemQuantity>
-                    <CartItemDelete>Delete</CartItemDelete>
+                    <CartItemDelete
+                        //onClick={(event)=>deleteItem(event)}
+                        //equals
+                        onClick={deleteItem}
+                    >
+                        Remove
+                    </CartItemDelete>
                 </CartItemInfoBottom>
             </CartItemInfo>
 
