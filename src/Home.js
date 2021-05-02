@@ -94,4 +94,6 @@ const Content = styled.div`
 
     //to help pop-up over banner
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 `
