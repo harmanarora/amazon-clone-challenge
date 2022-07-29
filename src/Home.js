@@ -92,8 +92,10 @@ const Content = styled.div`
     //margin moved up into other div, can't use position absolute
     margin-top: -350px;
 
-    //to help pop-up over banner
+    //to help pop-up over banner - how ?
     display: flex;
+
+    //evenly wrap of products
     flex-wrap: wrap;
     justify-content: space-evenly;
 `
