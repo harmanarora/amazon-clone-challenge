@@ -40,7 +40,7 @@ function Product({title,price,rating,image,id}) {
                 {title}
             </Title>
             <Price>
-                <p>$</p>{price}
+                <p>${price}</p>
             </Price>
             <Rating>
                 {

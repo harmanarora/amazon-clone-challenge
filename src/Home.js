@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Product from './Product.js'
 import { db } from './firebase.js'
+import { Button } from '@material-ui/core';
+import NewProducts from './NewProducts.js';
 
-function Home() {
+function Home({searchKey}) {
 
     //set products using State
     const [products, setProducts] = useState([]);
+    //added to load new products - 2022-07-30
+    const [newProducts, setNewProducts] = useState([]);
 
     //set products from db
     const getProducts = () => {
@@ -32,38 +36,88 @@ function Home() {
 
     //react hook - makes sure to call this function once when home page is rendered 1st time (page mount)
     useEffect(() => {
+        //added to load new products - 2022-07-30
+        setNewProducts(NewProducts);
         //console.log("call products");
-        getProducts()
+        getProducts();
     }, [])
+
+    console.log(searchKey);
+
+    // if(searchKey){
+    //     let tempProducts = products.filter((doc) => {
+    //         return doc.product.name.toLowerCase().includes(searchKey.toLowerCase());
+    //     })
+    //     console.log(tempProducts);
+    //     setProducts(tempProducts);
+    // }
+
     
     //console.log(products);
 
+    //added to load new products - 2022-07-30
+    const loadNewProducts = () => {
+        console.log("load new products..");
+        // console.log(newProducts);
+
+        newProducts.forEach((data)=>{
+            // console.log(data);
+            const res = db.collection('products').doc().set(data);
+            res.then((res)=>{
+                console.log(res);
+            }).catch( (err)=>{
+                console.log('error', err);
+            })
+        });
+    }
+
 
     return (
+        <>
+        <Button disabled onClick={loadNewProducts}>Load Fresh Products</Button>
         <HomeContainer>
-            <Banner>
-                
-            </Banner>
+            <Banner/>
             <Content>
-                {
+                {!searchKey ?(
                     products.map((data) =>{
                         return (
-                            <Product
-                            title={data.product.name}
-                            price={data.product.price}
-                            rating={data.product.rating}
-                            image={data.product.image}
-                            id={data.id}
-                            />
+                            <>
+                                <Product
+                                key={data.id}
+                                title={data.product.name}
+                                price={data.product.price}
+                                rating={data.product.rating}
+                                image={data.product.image}
+                                id={data.id}
+                                />
+                            </>
                         );
                     })
-                }
+                ):(
+                    products.filter((data) => {
+                        return data.product.name.toLowerCase().includes(searchKey.toLowerCase());
+                    }).map((data) => {
+                        return (
+                            <>
+                                <Product
+                                key={data.id}
+                                title={data.product.name}
+                                price={data.product.price}
+                                rating={data.product.rating}
+                                image={data.product.image}
+                                id={data.id}
+                                />
+                            </>
+                        );
+                    })
+                )}
             </Content>
         </HomeContainer>
+        </>
     )
 }
 
-export default Home
+export default Home;
 
 const HomeContainer = styled.div`
     max-width: 1400px;

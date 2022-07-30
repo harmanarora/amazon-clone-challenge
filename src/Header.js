@@ -5,7 +5,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import {Link} from "react-router-dom";
 
-function Header({ user, cartItems , signOut }) {
+function Header({ user, cartItems , signOut, handleSearch }) {
 
     const getQuantityCount = () => {
         let quantityCount =0;
@@ -35,16 +35,19 @@ function Header({ user, cartItems , signOut }) {
             </HeaderOptionAddress>
 
             <HeaderSearch>
-                <HeaderSearchInput type='text'/>
+                <HeaderSearchInput type='text' onKeyUp={handleSearch}/>
                 <HeaderSearchIconContainer>
                     <SearchIcon/>
                 </HeaderSearchIconContainer>
             </HeaderSearch>
 
             <HeaderNavItems>
-                <HeaderUserItem onClick={signOut}>
+                <HeaderUserItem>
                     <HeaderOptionLineOne>Hello, {user.name}</HeaderOptionLineOne>
                     <HeaderOptionLineTwo>Accounts & Lists</HeaderOptionLineTwo>
+                </HeaderUserItem>
+                <HeaderUserItem onClick={signOut}>
+                    <HeaderOptionLineTwo>Logout</HeaderOptionLineTwo>
                 </HeaderUserItem>
                 <HeaderUserItem>
                     <HeaderOptionLineOne>Returns</HeaderOptionLineOne>

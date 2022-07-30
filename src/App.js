@@ -45,6 +45,13 @@ function App() {
     })
   }
 
+  const [searchKey, setSearchKey] = useState(null);
+
+  const handleSearch = (e) => {
+    setSearchKey(e.target.value);
+    // console.log(e.target.value);
+  }
+
   return (
     <Router>
       {
@@ -57,6 +64,7 @@ function App() {
               signOut={signOut}
               user={user} 
               cartItems={cartItems}
+              handleSearch={handleSearch}
             />
 
             <Switch>
@@ -66,7 +74,7 @@ function App() {
               </Route>
 
               <Route path="/">
-                <Home/>
+                <Home searchKey={searchKey} />
               </Route>
             
             </Switch>
