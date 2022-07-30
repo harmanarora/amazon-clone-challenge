@@ -12,13 +12,13 @@ function Product({title,price,rating,image,id}) {
 
     const addToCart = () => {
         //dupes in Cart due to undefined, debugged
-        console.log(id);
+        // console.log(id);
         //creates from product
         const cartItem = db.collection("cartItems").doc(id);
         cartItem.get()
         //update quantity if already present
         .then((doc)=>{
-            console.log(doc);
+            // console.log(doc);
             if(doc.exists){
                 cartItem.update({
                     quantity: doc.data().quantity + 1
@@ -115,13 +115,24 @@ const ActionSection = styled.div`
 `
 
 const AddToCartButton = styled.button`
-    width: 100px;
+    width: 120px;
     height: 30px;
-    background-color: #f0c14b;
+    background-color: #FCD200;
 
-    //width, style, color & cornering
+    // //width, style, color & cornering
     border: 2px solid #a88734;
-    border-radius: 2px;
+    border-radius: 8px;
 
     cursor: pointer;
+    text-align: center;
+    box-shadow: 0 4px #999;
+
+    :hover {
+        background-color: #f0c14b
+    }
+    :active {
+        box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+        transform: translateY(4px);
+        background-color: #f0c14b;
+    }
 `

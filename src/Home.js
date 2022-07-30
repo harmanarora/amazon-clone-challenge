@@ -42,7 +42,7 @@ function Home({searchKey}) {
         getProducts();
     }, [])
 
-    console.log(searchKey);
+    // console.log(searchKey);
 
     // if(searchKey){
     //     let tempProducts = products.filter((doc) => {
@@ -51,7 +51,6 @@ function Home({searchKey}) {
     //     console.log(tempProducts);
     //     setProducts(tempProducts);
     // }
-
     
     //console.log(products);
 
@@ -74,7 +73,6 @@ function Home({searchKey}) {
 
     return (
         <>
-        <Button disabled onClick={loadNewProducts}>Load Fresh Products</Button>
         <HomeContainer>
             <Banner/>
             <Content>
@@ -113,6 +111,7 @@ function Home({searchKey}) {
                 )}
             </Content>
         </HomeContainer>
+        {false?<Button onClick={loadNewProducts}>Load Fresh Products</Button>:null}
         </>
     )
 }

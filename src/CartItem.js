@@ -11,11 +11,11 @@ function CartItem( {id, item} ) {
     }
 
     const changeQuantity = (event) => {
-        console.log(event);
-        console.log(event.target);
+        // console.log(event);
+        // console.log(event.target);
 
         let newQuantity = event.target.value;
-        console.log(newQuantity);
+        // console.log(newQuantity);
 
         //updates quantity in database -  works due to state and firebase
         db.collection('cartItems').doc(id).update({

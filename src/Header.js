@@ -47,7 +47,7 @@ function Header({ user, cartItems , signOut, handleSearch }) {
                     <HeaderOptionLineTwo>Accounts & Lists</HeaderOptionLineTwo>
                 </HeaderUserItem>
                 <HeaderUserItem onClick={signOut}>
-                    <HeaderOptionLineTwo>Logout</HeaderOptionLineTwo>
+                    <HeaderLogoutButton>Logout</HeaderLogoutButton>
                 </HeaderUserItem>
                 <HeaderUserItem>
                     <HeaderOptionLineOne>Returns</HeaderOptionLineOne>
@@ -96,27 +96,6 @@ const HeaderOptionLineTwo= styled.div`
     //bold
     font-weight: 700;
 `
-
-const HeaderSearch = styled.div`
-    //align items sideways
-    display: flex;
-
-    flex-grow: 1;
-    height: 40px;
-    
-    //smooth corners
-    border-radius: 4px;
-    overflow: hidden;
-
-    margin-left: 4px;
-    background-color: white;
-
-    //box-shadow on focus
-    :focus-within {
-        box-shadow: 0 0 0 3px #F90;
-    }
-`
-
 const HeaderSearchInput = styled.input`
     //grow more than others
     flex-grow: 1;
@@ -145,26 +124,98 @@ const HeaderSearchIconContainer = styled.div`
 
 const HeaderNavItems = styled.div`
     display: flex;
+    align-items : center;
+    padding: 0px 10px 0px 0px;
+`
+
+const HeaderLogoutButton= styled.div`
+    width: 65px;
+    height: 25px;
+    background-color: #febd69;
+    font-weight: bold;
+    color : black;
+
+    //width, style, color & cornering
+    border: 1px solid #a88734;
+    border-radius: 8px;
+
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 4px #999;
+
+    :hover {
+        background-color: yellow
+    }
+    :active {
+        box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+        transform: translateY(4px);
+        background-color: #f0c14b;
+    }
+`
+
+const HeaderSearch = styled.div`
+    //align items sideways
+    display: flex;
+
+    flex-grow: 1;
+    height: 40px;
+    
+    //smooth corners
+    border-radius: 4px;
+    overflow: hidden;
+
+    margin-left: 4px;
+    background-color: white;
+
+    //box-shadow on focus
+    :focus-within {
+        box-shadow: 0 0 0 3px #F90;
+    }
 `
 
 const HeaderUserItem = styled.div`
     //TRouBLe = Top Right Bottom Left
-    padding: 10px 9px 10px 9px;
+    padding: 0px 9px 0px 9px;
 
     cursor: pointer;
 `
 
 const HeaderOptionCart = styled.div`
+
+
     display: flex;
+    align-items:center;
+    padding-left: 2px;
+
+    width: 60px;
+
+    height: 30px;
+
+    background-color: #febd69;
+    font-weight: bold;
+    color : black;
+
+    //width, style, color & cornering
+    border: 1px solid #a88734;
+    border-radius: 8px;
+
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 4px #999;
+
+    :active {
+        box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+        transform: translateY(4px);
+        background-color: #f0c14b;
+    }
 
     //adding Link
     a {
         display: flex;
         align-items:center;
-        padding-right: 9px;
 
         //override default color of content
-        color: white;
+        color: black;
 
         //remove underline
         text-decoration: none;
@@ -172,7 +223,7 @@ const HeaderOptionCart = styled.div`
 `
 
 const HeaderCartCount = styled.div`
-    padding-left: 4px;
+    padding-left: 6px;
     font-weight: 700;
     color: #f08804
 `

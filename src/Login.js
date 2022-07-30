@@ -27,7 +27,7 @@ function Login({ setUser }) {
         <LoginContainer>
             <Content>
                 <AmazonLogo src='http://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG'/>
-                <h1>Login to your Amazon account</h1>
+                <h1>Login to your Amazon-clone account</h1>
                 <LoginButton
                     onClick={signIn}
                 >
@@ -81,8 +81,24 @@ const LoginButton = styled.button`
     margin-top: 50px;
     background-color: #f0c14b;
     height: 40px;
-    border: 2px solid #a88734;
-    border-radius: 4px;
     padding: 4px 8px;
     cursor: pointer;
+
+    background-color: #febd69;
+    font-weight: bold;
+    color : black;
+
+    //width, style, color & cornering
+    border: 1px solid #a88734;
+    border-radius: 8px;
+
+    text-align: center;
+    box-shadow: 0 4px #999;
+
+    :active {
+        box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+        transform: translateY(4px);
+        background-color: #f0c14b;
+    }
+
 `
