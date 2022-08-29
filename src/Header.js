@@ -3,10 +3,25 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import { useEffect } from 'react'
+import { db } from './firebase.js'
 import {Link} from "react-router-dom";
 
-function Header({ user, cartItems , signOut, handleSearch }) {
+function Header({ user, cartItems, setCartItems , signOut, handleSearch }) {
 
+    const getCartItems = () => {
+        //live db connection
+        db.collection('cartItems').onSnapshot((snapshot)=>{
+            const tempItems = snapshot.docs.map((doc) => ({
+            id : doc.id,
+            product: doc.data()
+            }))
+
+            //updates the state
+            setCartItems(tempItems);
+        })
+    }
+    
     const getQuantityCount = () => {
         let quantityCount =0;
         //loop through all cart items
@@ -17,6 +32,12 @@ function Header({ user, cartItems , signOut, handleSearch }) {
         });
         return quantityCount;
     };
+
+    useEffect(() => {
+        getCartItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    //empty [] as only needed for 1st page load - any object in there when refreshed will useEffect
 
     return (
         <HeaderContainer>

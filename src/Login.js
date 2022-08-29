@@ -7,7 +7,7 @@ function Login({ setUser }) {
     const signIn = () => {
         auth.signInWithPopup(provider).then((result) => {
             let user = result.user;
-            console.log(user);
+            // console.log(user);
 
             let newUser = {
                 name: user.displayName,

@@ -4,8 +4,8 @@ import Cart from './Cart.js';
 import Home from './Home.js';
 import {  BrowserRouter as Router,  Switch,  Route } from "react-router-dom";
 import styled from 'styled-components';
-import { useState, useEffect } from 'react'
-import { auth, db } from './firebase.js'
+import { useState } from 'react'
+import { auth } from './firebase.js'
 import Login from './Login';
 
 function App() {
@@ -13,24 +13,6 @@ function App() {
   const [ user, setUser ] = useState(JSON.parse(localStorage.getItem('user')));
 
   const [ cartItems, setCartItems ] = useState([]);
-
-  const getCartItems = () => {
-    //live db connection
-    db.collection('cartItems').onSnapshot((snapshot)=>{
-      const tempItems = snapshot.docs.map((doc) => ({
-        id : doc.id,
-        product: doc.data()
-      }))
-
-      //updates the state
-      setCartItems(tempItems);
-    })
-  }
-
-  useEffect(() => {
-    getCartItems();
-    //empty below as only needed for 1st page load - any object in there when refreshed will useEffect
-  }, [])
 
   //console.log(cartItems);
   //console.log("User", user);
@@ -64,6 +46,7 @@ function App() {
               signOut={signOut}
               user={user} 
               cartItems={cartItems}
+              setCartItems={setCartItems}
               handleSearch={handleSearch}
             />
 
